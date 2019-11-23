@@ -1,0 +1,4 @@
+return {
+    WIFI_SSID = "My Home Network",
+    WIFI_PSK = "MySuperSecretPassword"
+}

@@ -1,0 +1,4 @@
+node_modules/
+_secrets/
+*_secrets.lua
+*_config.lua
