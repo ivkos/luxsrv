@@ -1,7 +1,10 @@
 # luxsrv
+❤️💚💙
 
-Lua program for the NodeMCU ESP8266 devkit that listens for 
+**luxsrv** is a Lua program for the NodeMCU ESP8266 devkit that listens for 
 network packets describing the color setup and driving the WS2812B LED strip.
+
+**luxsrv** is part of **[Lux](https://github.com/ivkos/lux)**.
 
 ## NodeMCU
 Refer to these resources for more details:
