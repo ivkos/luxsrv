@@ -3,14 +3,10 @@ local PORT = 42170
 
 print("[LUX] Initializing ws2812...")
 ws2812.init()
+ws2812.write(string.rep(string.char(0x00), LED_COUNT * 3))
 
 print("[LUX] Creating UDP socket...")
 local socket = net.createUDPSocket()
-
-local buf = ws2812.newBuffer(LED_COUNT, 3)
-
--- Reset the strip because it starts with a few pixels on after esp boot
-ws2812.write(buf)
 
 local handle_data = function(_, data)
     local data_len = string.len(data)
@@ -36,9 +32,7 @@ local handle_data = function(_, data)
             return
         end
 
-        buf:replace(data:sub(effect_payload_offset + 1))
-
-        ws2812.write(buf)
+        ws2812.write(data:sub(effect_payload_offset + 1))
     else
         -- TODO Add support for other modes
         print("[LUX] Unsupported mode: " .. mode)
