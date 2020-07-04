@@ -8,7 +8,7 @@ ws2812.write(string.rep(string.char(0x00), LED_COUNT * 3))
 print("[LUX] Creating UDP socket...")
 local socket = net.createUDPSocket()
 
-local handle_data = function(_, data)
+local handle_data = function(sock, data, remote_port, remote_ip)
     local data_len = string.len(data)
     if data_len < 3 then
         print("[LUX] Message has invalid length: " .. data_len)
@@ -33,6 +33,8 @@ local handle_data = function(_, data)
         end
 
         ws2812.write(data:sub(effect_payload_offset + 1))
+    elseif (mode == 0xff) then
+        sock:send(remote_port, remote_ip, "1")
     else
         -- TODO Add support for other modes
         print("[LUX] Unsupported mode: " .. mode)
