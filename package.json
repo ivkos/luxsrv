@@ -1,13 +1,11 @@
 {
   "private": true,
   "devDependencies": {
-    "glob": "^7.1.6",
-    "nodemcu-tool": "^3.1.0"
+    "nodemcu-tool": "^3.2.1"
   },
   "scripts": {
     "ls": "nodemcu-tool fsinfo",
     "format": "nodemcu-tool mkfs --noninteractive",
-    "upload": "nodemcu-tool upload --minify --compile src/*.lua && nodemcu-tool upload --minify src/init.lua",
-    "upload-win": "powershell.exe -Command \"./node_modules/.bin/nodemcu-tool upload --minify --compile (ls ./src/*.lua | % FullName) ; ./node_modules/.bin/nodemcu-tool upload --minify src/init.lua\""
+    "upload": "nodemcu-tool upload --minify --compile src/*.lua && nodemcu-tool upload --minify src/init.lua"
   }
 }
