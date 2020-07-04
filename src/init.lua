@@ -1,5 +1,4 @@
 local STARTUP_DELAY = 0
-local ENABLE_NTP = false
 local MDNS_NAME = "esp01"
 
 -- -------------------------------------------------------------------------
@@ -43,7 +42,6 @@ local wifi_connect_event = function(T)
     print("[init] Waiting for IP address...")
 end
 
-local timesync
 local wifi_got_ip_event = function(T)
     -- Note: Having an IP address does not mean there is internet access!
     -- Internet connectivity can be determined with net.dns.resolve().
@@ -51,20 +49,11 @@ local wifi_got_ip_event = function(T)
     print("[init] IP Address: " .. T.IP)
 
     if not has_run_startup then
-        if ENABLE_NTP then
-            timesync = pcall_dofile("timesync.lc")
-            timesync.sync()
-        end
-
         if STARTUP_DELAY > 0 then
             print("[init] You have " .. STARTUP_DELAY .. " seconds to abort startup")
             tmr.create():alarm(STARTUP_DELAY * 1000, tmr.ALARM_SINGLE, startup)
         else
             startup()
-        end
-    else
-        if ENABLE_NTP then
-            timesync.sync_once()
         end
     end
 
